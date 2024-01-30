@@ -1,0 +1,43 @@
+<div class="card hide " id="role-info">
+    <div class="card-header">
+        <strong>Role Info</strong>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-2">
+                <i class="fa fa-2x"></i>
+                <h4 id="number"></h4>
+            </div>
+            <div class="col-2">
+                <h3 id="name"></h3>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+    document.addEventListener('DOMContentLoaded',()=>{
+         const elems = {
+                $id : $('#id'),
+                $name : $('#name'),
+                $role : $('#role-info')
+                }
+                
+                $('#roleId').change( async ()=>{
+                   const RoleId =  elems.$id.val() || null
+                   await showRoleInfo(elems,RoleId);
+                })
+                
+                 var url = new URL(document.location);
+                        var params = url.searchParams;
+                        var roleId   = params.get("roleId");
+                        if (roleId != null) {
+                            $("#roleId").val(roleId);
+                            $('#roleId').trigger("chosen:updated");
+                             showRoleInfo(elems, roleId);
+                        }
+    });
+   
+    </script>
+}

@@ -1,0 +1,93 @@
+@model api_fetch.Areas.Setup.ViewModel.EmployeeVm
+<div class="main-container">
+    <div class="row">
+        <div class="col-8">
+            <form method="post">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Add Employee</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label asp-for="Name"></label>
+                                    <input type="text" asp-for="Name" class="form-control" name="Name"/>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label asp-for="Address"></label>
+                                    <input type="text" asp-for="Address" class="form-control" name="Address"/>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label>Select Role</label>
+                                    <select class="form-control chosen" asp-for="RoleId" id="roleId" name="RoleId">
+                                        <option selected="selected" value="">--Select One--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label asp-for="Contact"></label>
+                                    <input type="text" asp-for="Contact" class="form-control" name="Contact"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block">
+                                        <i class="fa fa-save"></i>
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4">
+            <partial name="_roleInfo"/>
+        </div>
+    </div>
+</div>
+<script src="~/js/roleInfo.js"></script>
+@section Scripts
+{
+    <script>
+    document.addEventListener('DOMContentLoaded',async()=>{    
+        try{
+            const response = await fetch('/Api/Roles/GetRoles');
+            console.log(response);
+             if (!response.ok){
+             throw new Error(`Failed to fetch roles. Status: ${response.status}`);    
+             }
+            const data = await response.json();
+             const $RoleId = $('#roleId');
+             $RoleId.empty();
+             $RoleId.append($('<option>', {
+                 value:'',
+                 text : '--Select one--',
+                 selected: true
+             }));
+             data.forEach(x=>{
+                 $RoleId.append($('<option>',{
+                     value: x.id,
+                     text : x.name
+                 }));
+             });
+             $RoleId.trigger('chosen:updated');
+            }catch (e){
+            console.error('error fetching roles', e);
+            }
+    }); 
+    </script>
+
+}

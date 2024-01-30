@@ -1,0 +1,31 @@
+@model api_fetch.Areas.Setup.ViewModel.RoleVm
+
+<div class="main-container">
+    <div class="card">
+        <div class="card-header">
+            <strong>Roles</strong>
+        </div>
+        <div class="card-body">
+                <table class="table table-sm table-condensed table-bordered">
+                    <thead>
+                    <tr>
+                        <th>S.N</th>
+                        <th>Role</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        int i = 1;
+                        foreach (var item in Model.RolesList)
+                        {
+                            <tr>
+                                <td>@(i++)</td>
+                                <td>@item.Name</td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>
