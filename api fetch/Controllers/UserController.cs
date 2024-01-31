@@ -1,6 +1,6 @@
-﻿using api_fetch.Data;
-using api_fetch.Models;
-using api_fetch.ViewModel;
+﻿using api_fetch.ViewModel;
+using App.User.Dto;
+using App.User.Service.Interface;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,14 +10,14 @@ namespace api_fetch.Controllers
 	[AllowAnonymous]
 	public class UserController : Controller
 	{
-		private readonly ApplicationDbContext _context;
 		private readonly INotyfService _notyfService;
+		private readonly IUserService _userService;
 
-		public UserController(ApplicationDbContext context,
-			INotyfService notyfService)
+		public UserController(INotyfService notyfService,
+			IUserService userService)
 		{
-			_context = context;
 			_notyfService = notyfService;
+			_userService = userService;
 		}
 		[HttpGet]
 		public IActionResult Register()
@@ -30,15 +30,14 @@ namespace api_fetch.Controllers
 		{
 			try
 			{
-				var user = new User()
+				var user = new CreateUserDto()
 				{
-					Name = vm.UserName,
+					UserName = vm.UserName,
 					Email = vm.Email,
 					Phone = vm.Phone,
-					Password = Crypter.Crypter.Crypt(vm.Password),
+					Password = vm.Password,
 				};
-				_context.users.Add(user);
-				_context.SaveChanges();
+				_userService.CreateUser(user);
 				_notyfService.Success("User Added!");
 				
 			}catch (Exception ex)

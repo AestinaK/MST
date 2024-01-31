@@ -1,6 +1,8 @@
+using App.Base.GenericModel;
+
 namespace api_fetch.Models;
 
-public class Employee :GenericModel.GenericModel
+public class Employee :GenericModel
 {
     public virtual Roles Roles { get; set; }
     public long RoleId { get; set; }
