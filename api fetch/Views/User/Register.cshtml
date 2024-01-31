@@ -1,4 +1,5 @@
-﻿@{
+﻿@model api_fetch.ViewModel.UserAddVm
+@{
     Layout = null;
 }
 
@@ -27,28 +28,27 @@
 			<div class="row justify-content-center">
 				<div class="col-md-6 col-lg-4">
 					<div class="login-wrap p-0">
-						<form action="#" class="signin-form">
+						<form method="post" class="signin-form">
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Username" required>
+								<input type="text" class="form-control" placeholder="Username" required asp-for="UserName" name="UserName">
 							</div>
 							<div class="form-group">
-								<input type="text"  class="form-control" placeholder="Contact Number" />
+								<input type="text"  class="form-control" placeholder="Contact Number" asp-for="Phone" name="Phone" />
 							</div>
 							<div class="form-group">
-								<input type="email" class="form-control" placeholder="Email" />
+								<input type="email" class="form-control" placeholder="Email" asp-for="Email" name="Email"/>
 							</div>
 							<div class="form-group">
-								<input id="password-field" type="password" class="form-control" placeholder="Password" required>
-								<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+								<input id="psw" type="password" class="form-control" placeholder="Password" asp-for="Password" name="Password" required>
+								<span toggle="#password-field"></span>
 							</div>
 							<div class="form-group">
-								<input id="password-field"  type="password" class="form-control" placeholder="Confirm Password" required/>
-								<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+								<input id="cpsw"  type="password" class="form-control" placeholder="Confirm Password" required/>
+								<span toggle="#password-field"  asp-validation-for="ConfirmPassword" id="msg" style="color:red;"></span>
 							</div>
 							<div class="form-group">
 								<button type="submit" class="form-control btn btn-primary submit px-3">Register</button>
-							</div>
-		
+							</div>		
 						</form>
 					</div>
 				</div>
@@ -61,3 +61,25 @@
 	<script src="~/js/main.js"></script>
 </body>
 </html>
+@section Scripts{
+	<script>
+		document.addEventListener('DOMContentLoaded',()=>{
+			const password = document.getElementById('psw');
+			const confirmPassword = document.getElementById('cpsw');
+			const msg = document.getElementById('msg');
+
+			function ValidatePassword(){
+				const pswInput = password.value;
+				const cpswInput = confirmPassword.value;
+				if(cpswInput !== "" && pswInput !== cpswInput ){
+					msg.innerText ="Password do not match!";
+				}else{
+					msg.innerText = "";
+				}
+				console.log(pswInput);
+			}
+			ValidatePassword();
+			confirmPassword.addEventListener('input',ValidatePassword);
+		});
+	</script>
+}

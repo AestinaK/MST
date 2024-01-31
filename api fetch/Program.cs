@@ -1,6 +1,9 @@
 using api_fetch.Data;
+using api_fetch.Manager;
 using AspNetCoreHero.ToastNotification;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,11 @@ builder.Services.AddNotyf(config =>
     config.IsDismissable = false;
     config.Position = NotyfPosition.BottomRight;
 });
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(x => { x.LoginPath = "/Auth/Login"; });
+builder.Services.AddScoped<DbContext, ApplicationDbContext>()
+    .AddScoped<IAuthManager, AuthManager>()
+    .AddHttpContextAccessor();
 
 var app = builder.Build();
 
@@ -31,14 +39,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllerRoute(
     name: "areaRoute",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-);
+).RequireAuthorization();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}").RequireAuthorization();
 
 app.Run();

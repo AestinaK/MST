@@ -42,10 +42,10 @@ public class RoleController : Microsoft.AspNetCore.Mvc.Controller
                 Name = vm.Name,
                 Description = vm.Description
             };
-            _notyfService.Success("Added");
             _context.roles.Add(role);
             _context.SaveChanges();
-        }
+			_notyfService.Success("Added");
+		}
         catch (Exception e)
         {
             _notyfService.Error(e.Message);

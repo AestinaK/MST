@@ -39,10 +39,11 @@ public class EmployeeController : Microsoft.AspNetCore.Mvc.Controller
                 Contact = vm.Contact,
                 RoleId = vm.RoleId
             };
-            _notyfService.Success("Added");
+
             _context.employees.Add(employee);
             _context.SaveChanges();
-        }
+			_notyfService.Success("Added");
+		}
         catch (Exception e)
         {
             _notyfService.Error(e.Message);
