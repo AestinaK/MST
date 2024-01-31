@@ -2,11 +2,12 @@
 using api_fetch.Models;
 using api_fetch.ViewModel;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api_fetch.Controllers
 {
-
+	[AllowAnonymous]
 	public class UserController : Controller
 	{
 		private readonly ApplicationDbContext _context;

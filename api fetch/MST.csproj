@@ -130,4 +130,10 @@
 
 
 
+  <ItemGroup>
+    <ProjectReference Include="..\App.User\App.User.csproj" />
+  </ItemGroup>
+
+
+
 </Project>
