@@ -1,6 +1,9 @@
 using api_fetch.Data;
 using api_fetch.Manager;
+using api_fetch.Provider;
+using api_fetch.Provider.Interface;
 using App.Base;
+using App.Expenses;
 using App.Setup;
 using App.User;
 using AspNetCoreHero.ToastNotification;
@@ -28,10 +31,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.UserConfiguration()
     .BaseConfig()
-    .SetupConfig();
+    .SetupConfig()
+    .UseRootConfig();
 builder.Services.AddScoped<DbContext, ApplicationDbContext>()
     .AddScoped<IAuthManager, AuthManager>()
-    .AddHttpContextAccessor();
+    .AddHttpContextAccessor()
+    .AddScoped<IUserProvider,UserProvider>();
 
 var app = builder.Build();
 
