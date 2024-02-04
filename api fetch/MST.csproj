@@ -131,6 +131,7 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\App.Root\App.Root.csproj" />
     <ProjectReference Include="..\App.Setup\App.Setup.csproj" />
     <ProjectReference Include="..\App.User\App.User.csproj" />
   </ItemGroup>

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>App.Expenses</RootNamespace>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+      <ProjectReference Include="..\App.Base\App.Base.csproj" />
+      <ProjectReference Include="..\App.Setup\App.Setup.csproj" />
+      <ProjectReference Include="..\App.User\App.User.csproj" />
+    </ItemGroup>
+
+
+
+</Project>

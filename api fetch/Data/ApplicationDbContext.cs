@@ -1,4 +1,5 @@
 ﻿using api_fetch.Models;
+using App.Expenses;
 using App.Setup;
 using App.User;
 using App.User.Model;
@@ -20,6 +21,7 @@ namespace api_fetch.Data
         {
             builder.AddUser();
             builder.AddSetup();
+            builder.AddRoot();
             base.OnModelCreating(builder);
         }
         public DbSet<Roles> roles { get; set; }

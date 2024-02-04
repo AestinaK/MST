@@ -81,6 +81,42 @@ namespace api_fetch.Migrations
                     b.ToTable("roles");
                 });
 
+            modelBuilder.Entity("App.Expenses.Model.ExpensesRecord", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric");
+
+                    b.Property<long>("ExpensesId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("RecDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("TxnDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExpensesId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Expenses_Record", "Root");
+                });
+
             modelBuilder.Entity("App.Setup.Model.ExpensesCategory", b =>
                 {
                     b.Property<long>("Id")
@@ -168,6 +204,25 @@ namespace api_fetch.Migrations
                         .IsRequired();
 
                     b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("App.Expenses.Model.ExpensesRecord", b =>
+                {
+                    b.HasOne("App.Setup.Model.ExpensesCategory", "Expenses")
+                        .WithMany()
+                        .HasForeignKey("ExpensesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("App.User.Model.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Expenses");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
