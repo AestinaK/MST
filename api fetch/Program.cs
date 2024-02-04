@@ -1,6 +1,7 @@
 using api_fetch.Data;
 using api_fetch.Manager;
 using App.Base;
+using App.Setup;
 using App.User;
 using AspNetCoreHero.ToastNotification;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -17,7 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 builder.Services.AddNotyf(config =>
 {
-    config.DurationInSeconds = 20;
+    config.DurationInSeconds = 10;
     config.IsDismissable = false;
     config.Position = NotyfPosition.BottomRight;
 });
@@ -26,7 +27,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie(x => { x.LoginPath = "/Auth/Login"; });
 
 builder.Services.UserConfiguration()
-    .BaseConfig();
+    .BaseConfig()
+    .SetupConfig();
 builder.Services.AddScoped<DbContext, ApplicationDbContext>()
     .AddScoped<IAuthManager, AuthManager>()
     .AddHttpContextAccessor();

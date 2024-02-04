@@ -131,11 +131,19 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\App.Setup\App.Setup.csproj" />
     <ProjectReference Include="..\App.User\App.User.csproj" />
   </ItemGroup>
 
 
 
+
+
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\plugins\" />
+  </ItemGroup>
 
 
 

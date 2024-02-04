@@ -1,0 +1,38 @@
+@model api_fetch.Areas.Setup.ViewModel.ExpensesC.ExpensesCVm
+
+<div class="main-container">
+    <form method="post">
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                       <strong class="card-title">Add Expenses category</strong> 
+                    </div>
+                    <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="Name"></label>
+                                <input asp-for="Name" type="text" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description"></label>
+                                <textarea asp-for="Description" class="form-control" rows="5" ></textarea>
+                            </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block">
+                                        <i class="fas fa-check"></i>
+                                        Save
+                                    </button>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

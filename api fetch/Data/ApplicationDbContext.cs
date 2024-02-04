@@ -1,4 +1,5 @@
 ﻿using api_fetch.Models;
+using App.Setup;
 using App.User;
 using App.User.Model;
 using Microsoft.EntityFrameworkCore;
@@ -18,10 +19,12 @@ namespace api_fetch.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.AddUser();
+            builder.AddSetup();
             base.OnModelCreating(builder);
         }
         public DbSet<Roles> roles { get; set; }
         public DbSet<Employee> employees { get; set; }
         public DbSet<User> users { get; set; }
+        
     }
 }

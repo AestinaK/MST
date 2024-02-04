@@ -81,7 +81,53 @@ namespace api_fetch.Migrations
                     b.ToTable("roles");
                 });
 
-            modelBuilder.Entity("api_fetch.Models.User", b =>
+            modelBuilder.Entity("App.Setup.Model.ExpensesCategory", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("RecDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("expenses_category", "setup");
+                });
+
+            modelBuilder.Entity("App.Setup.Model.IncomeCategory", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("RecDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("income_category", "setup");
+                });
+
+            modelBuilder.Entity("App.User.Model.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
