@@ -23,7 +23,7 @@
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed text-sm" id="body">
 <div class="wrapper">
-    @await RenderSectionAsync("PreScripts", required:false)
+    @await RenderSectionAsync("PreScripts", required: false)
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-dark">
         <!-- Left navbar links -->
@@ -154,10 +154,27 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">
-                            <i class="fa fa-plus nav-icon"></i>
-                            <p>Add</p>
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                Expenses
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-area="Root" asp-controller="Expenses" asp-action="Add" class="nav-link">
+                                    <i class="fa fa-plus nav-icon"></i>
+                                    <p>Add Expenses</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a  asp-area="Root" asp-controller="Expenses" asp-action="Index" class="nav-link">
+                                    <i class="far fa-eye nav-icon"></i>
+                                    <p>View Expenses</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>
@@ -200,7 +217,6 @@
 <script src="~/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js" asp-append-version="true"></script>
 <!-- AdminLTE App -->
 <script src="~/js/adminlte.js" asp-append-version="true"></script>
-
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
 <script src="~/plugins/jquery-mousewheel/jquery.mousewheel.js" asp-append-version="true"></script>
@@ -257,10 +273,12 @@
         </script>
 }
 
+<partial name="Includes/NepaliDatePickerFiles"/>
 <partial name="_DataTableJS.cshtml"/>
+<script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
 @await Component.InvokeAsync("Notyf")
 </body>
-<script src="~/js/site.js" asp-append-version="true"></script>
+
 
 </html>

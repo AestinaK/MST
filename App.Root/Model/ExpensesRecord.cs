@@ -16,4 +16,5 @@ public class ExpensesRecord : GenericModel
     public virtual  ExpensesCategory Expenses { get; set; }
     public long ExpensesId{get; set; }
     public PaymentStatus  Status { get; set; }
+    public string? Description { get; set; } 
 }

@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Setup", "App.Setup\App.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Root", "App.Root\App.Root.csproj", "{0DCFEE33-F530-4817-BB88-EF4CFDD25108}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{7F0F41A7-CECA-4ECF-8E9C-8065165605A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NepaliDateConverter", "NepaliDateConverter\NepaliDateConverter.csproj", "{16A986B0-B400-4CC1-A920-4868D75FD3D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,11 +43,18 @@ Global
 		{0DCFEE33-F530-4817-BB88-EF4CFDD25108}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DCFEE33-F530-4817-BB88-EF4CFDD25108}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DCFEE33-F530-4817-BB88-EF4CFDD25108}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16A986B0-B400-4CC1-A920-4868D75FD3D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16A986B0-B400-4CC1-A920-4868D75FD3D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16A986B0-B400-4CC1-A920-4868D75FD3D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16A986B0-B400-4CC1-A920-4868D75FD3D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F4D4A52C-76F0-4890-9203-0302EBBD1E8E}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{16A986B0-B400-4CC1-A920-4868D75FD3D2} = {7F0F41A7-CECA-4ECF-8E9C-8065165605A8}
 	EndGlobalSection
 EndGlobal

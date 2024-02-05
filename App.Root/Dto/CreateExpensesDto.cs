@@ -9,4 +9,5 @@ public class CreateExpensesDto
     public decimal  Amount { get; set; }
     public long ExpensesId{get; set; }
     public PaymentStatus  Status { get; set; }
+    public string? Descrption { get; set; }
 }

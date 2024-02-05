@@ -7,6 +7,8 @@ using App.Expenses;
 using App.Setup;
 using App.User;
 using AspNetCoreHero.ToastNotification;
+using DateConverter;
+using DateConverter.Converters;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -32,7 +34,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.UserConfiguration()
     .BaseConfig()
     .SetupConfig()
-    .UseRootConfig();
+    .UseRootConfig()
+    .UseNepaliDateConfig();
 builder.Services.AddScoped<DbContext, ApplicationDbContext>()
     .AddScoped<IAuthManager, AuthManager>()
     .AddHttpContextAccessor()

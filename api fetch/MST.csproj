@@ -26,6 +26,8 @@
     <_ContentIncludedByDefault Remove="Areas\Setup\Views\Role\Add.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Setup\Views\_ViewImports.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Setup\Views\_ViewStart.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\Components\DateDisplayVc\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\Components\DateInputVc\Default.cshtml" />
   </ItemGroup>
 
 
@@ -134,6 +136,7 @@
     <ProjectReference Include="..\App.Root\App.Root.csproj" />
     <ProjectReference Include="..\App.Setup\App.Setup.csproj" />
     <ProjectReference Include="..\App.User\App.User.csproj" />
+    <ProjectReference Include="..\NepaliDateConverter\NepaliDateConverter.csproj" />
   </ItemGroup>
 
 
@@ -143,6 +146,7 @@
 
 
   <ItemGroup>
+    <Folder Include="wwwroot\library\" />
     <Folder Include="wwwroot\plugins\" />
   </ItemGroup>
 
