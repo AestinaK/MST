@@ -11,7 +11,7 @@ public static class DiConfig
     public static IServiceCollection SetupConfig(this IServiceCollection services)
     {
         services.AddScoped<IExpensesCRepository, ExpensesCRepository>();
-        services.AddScoped<IncomeCRepository, IncomeCRepository>();
+        services.AddScoped<IIncomeCRepository,IncomeCRepository>();
 
         services.AddScoped<IExpensesCService, ExpensesCService>();
         services.AddScoped<IIncomeCService, IncomeCService>();

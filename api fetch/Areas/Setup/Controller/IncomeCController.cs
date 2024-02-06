@@ -28,7 +28,7 @@ public class IncomeCController : Microsoft.AspNetCore.Mvc.Controller
     }
 
     [HttpPost]
-    public IActionResult Add(IncomeCVm vm)
+    public async Task<IActionResult> Add(IncomeCVm vm)
     {
         try
         {
@@ -37,7 +37,7 @@ public class IncomeCController : Microsoft.AspNetCore.Mvc.Controller
                 Name = vm.Name,
                 Description = vm.Description
             };
-            _incomeCService.CreateIncomeCategory(dto);
+            await _incomeCService.CreateIncomeCategory(dto);
             _notyfService.Success("Added");
         }
         catch (Exception e)

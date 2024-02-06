@@ -21,7 +21,7 @@ public class IncomeCService : IIncomeCService
         income.Description = dto.Description;
 
         await _uow.CreateAsync(income);
-         await _uow.CommitAsync();
-         return income;
+        await _uow.CommitAsync();
+        return income;
     }
 }
