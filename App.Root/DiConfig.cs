@@ -11,6 +11,7 @@ public static class DiConfig
     public static IServiceCollection UseRootConfig(this IServiceCollection service)
     {
         service.AddScoped<IExpensesRecordRepository, ExpensesRecordRepository>();
+        service.AddScoped<IIncomeRecordRepository, IncomeRecordRepository>();
 
         service.AddScoped<IExpensesRecordService, ExpensesRecordService>();
         return service;

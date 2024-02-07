@@ -8,6 +8,7 @@ public static class EntityRegistrar
     public static ModelBuilder AddRoot(this ModelBuilder builder)
     {
         builder.Entity<ExpensesRecord>().Property(x => x.Status).HasConversion<String>();
+        builder.Entity<IncomeRecord>();
         return builder;
     }
 }

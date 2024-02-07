@@ -29,4 +29,5 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
 
     public async Task<T> FindAsync(long id) => await _dbSet.FindAsync(id);
+    public IQueryable<T> GetQueryable() => _dbSet.AsQueryable();
 }

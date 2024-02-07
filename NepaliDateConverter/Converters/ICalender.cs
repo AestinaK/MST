@@ -1,10 +1,10 @@
-namespace DateConverter.Converters.Interface;
+namespace DateConverter.Converters;
 ///<summary>
 ///Interface
 ///<summary>
- interface ICalender
-{
-     /// <summary>
+ interface ICalendar
+    {
+        /// <summary>
         /// Returns week days; Sunday, Monday, ... , Saturday. 
         /// It expects index range from 1 through 7
         /// </summary>
@@ -53,4 +53,4 @@ namespace DateConverter.Converters.Interface;
         /// <returns><c>true</c>, if leap year was ised, <c>false</c> otherwise.</returns>
         /// <param name="year">2016</param>
         bool IsLeapYear(int year);
-}
+    }
