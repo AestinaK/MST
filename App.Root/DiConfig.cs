@@ -14,6 +14,7 @@ public static class DiConfig
         service.AddScoped<IIncomeRecordRepository, IncomeRecordRepository>();
 
         service.AddScoped<IExpensesRecordService, ExpensesRecordService>();
+        service.AddScoped<IIncomeService, IncomeService>();
         return service;
     }
 }

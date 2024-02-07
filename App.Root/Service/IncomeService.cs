@@ -1,12 +1,12 @@
-using App.Setup.Dto;
-using App.Setup.Model;
-using App.Setup.Service.Interface;
+using App.Expenses.Dto;
+using App.Expenses.Model;
+using App.Expenses.Service.Interface;
 
 namespace App.Expenses.Service;
 
-public class IncomeService : IIncomeCService
+public class IncomeService : IIncomeService
 {
-    public Task<IncomeCategory> CreateIncomeCategory(IncomeCDto dto)
+    public Task<IncomeRecord> Create(IncomeDto dto)
     {
         throw new NotImplementedException();
     }
