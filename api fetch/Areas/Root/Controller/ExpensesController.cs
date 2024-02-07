@@ -6,6 +6,7 @@ using App.Expenses.Service.Interface;
 using App.Setup.Repository.Interface;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace api_fetch.Areas.Root.Controller;
 
@@ -39,8 +40,19 @@ public class ExpensesController : Microsoft.AspNetCore.Mvc.Controller
     public async Task<IActionResult> Index()
     {
         var vm = new ExpensesSearchVm();
-        vm.ExpensesCategories = await _expensesRecordRepo.GetAllAsync();
-        vm.IncomeCategories = await _incomeCRepository.GetAllAsync();
+        var expenses = _expensesCRepo.GetQueryable();
+        var data =  _expensesRecordRepo.GetQueryable();
+        var result = await (from d in data
+            join e in expenses on d.ExpensesId equals e.Id
+            select new ExpensesInfoVm()
+            {
+                Id = d.Id,
+                Amount = d.Amount,
+                Category = e.Name,
+                Date = d.TxnDate,
+                Status = d.Status
+            }).ToListAsync();
+        vm.ExpensesCategories = result;
         return View(vm);
     }
 
@@ -48,6 +60,7 @@ public class ExpensesController : Microsoft.AspNetCore.Mvc.Controller
     public async Task<IActionResult> Add()
     {
         var vm = new ExpensesVm();
+        vm.Date = DateTime.Today.ToUniversalTime();
         vm.Categories = await _expensesCRepo.GetAllAsync();
         return View(vm);
     }
@@ -69,5 +82,15 @@ public class ExpensesController : Microsoft.AspNetCore.Mvc.Controller
         _notyfService.Success("Added!");
 
         return RedirectToAction(nameof(Add));
+    }
+
+    public IActionResult Update()
+    {
+        return View();
+    }
+
+    public IActionResult Delete()
+    {
+        return RedirectToAction(nameof(Index));
     }
 }

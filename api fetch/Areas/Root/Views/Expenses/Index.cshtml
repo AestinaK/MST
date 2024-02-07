@@ -9,7 +9,7 @@
                             <div class="col-2">
                                 <div class="form-group">
                                     <label>Date From</label>
-                                    <vc:date-input name="Date" value="DateTime.Today"/>
+                                    <vc:date-input name="Date" value="@Model.Date"/>
                                 </div>
                             </div>
                             @* <div class="col-2"> *@
@@ -18,12 +18,12 @@
                             @*         <vc:date-input-vc value="Model.EndDate" name="@nameof(Model.EndDate)"/> *@
                             @*     </div> *@
                             @* </div> *@
-                            <div class="col-md-2">
-                                <lable>&nbsp;</lable>
+                            <div class="col-2">
                                 <div class="form-group">
+                                    <label>&nbsp;</label>
                                     <button class="btn btn-primary btn-block">
-                                        <i class="fas fa-search"></i>
-                                        Search
+                                        <i class="fa fa-search mr-1"></i>
+                                        search
                                     </button>
                                 </div>
                             </div>
@@ -49,18 +49,33 @@
                         <tr>
                             <th>S.n</th>
                             <th>Name</th>
-                            <th>Address</th>
+                            <th>Payment Status</th>
                             <th>Amount</th>
+                            <th>Transaction Date</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-
                         @{
+                            int i = 1;
                             @foreach (var item in Model.ExpensesCategories)
                             {
                                 <tr>
-                                    <td>@item.Expenses</td>
+                                    <td>@(i++)</td>
+                                    <td>@item.Category</td>
                                     <td>@item.Status</td>
+                                    <td>@item.Amount</td>
+                                    <td>@item.Date</td>
+                                    <td>
+                                        <a class="btn btn-success" asp-controller="Expenses" asp-action="Update" asp-area="Root">
+                                            <i class="fa fa-pencil-square-o"></i>
+                                            Update
+                                        </a>
+                                        <a class="btn btn-danger" asp-area="Root" asp-controller="Expenses" asp-action="Delete">
+                                            <i class="fa fa-trash-o"></i>
+                                            Delete
+                                        </a>
+                                    </td>
                                 </tr>
                             }
                         }
