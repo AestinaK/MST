@@ -64,9 +64,10 @@
                                             <i class="fa fa-pencil-square-o"></i>
                                             Update
                                         </a>
-                                        <a class="btn btn-danger">
+                                        <a class="btn btn-danger" asp-area="Root" asp-controller="Income" asp-action="Delete"
+                                           asp-route-id="@item.Id" onclick="alert('Are you sure?')">
                                             <i class="fa fa-trash-o"></i>
-                                            Update
+                                            Delete
                                         </a>
                                     </td>
                                 </tr>

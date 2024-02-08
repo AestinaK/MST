@@ -89,8 +89,18 @@ public class ExpensesController : Microsoft.AspNetCore.Mvc.Controller
         return View();
     }
 
-    public IActionResult Delete()
+    public async Task<IActionResult> Delete(long id)
     {
+        try
+        {
+            await _expensesRecordService.Delete(id);
+            _notyfService.Success("Deleted!");
+        }
+        catch (Exception e)
+        {
+           _notyfService.Error(e.Message);
+           return Redirect("/");
+        }
         return RedirectToAction(nameof(Index));
     }
 }

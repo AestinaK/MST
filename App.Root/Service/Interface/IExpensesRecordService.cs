@@ -6,4 +6,5 @@ namespace App.Expenses.Service.Interface;
 public interface IExpensesRecordService
 {
     Task<ExpensesRecord> CreateExpensesRecord(CreateExpensesDto dto);
+    Task<ExpensesRecord> Delete(long id);
 }

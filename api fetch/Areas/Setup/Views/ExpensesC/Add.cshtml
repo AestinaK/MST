@@ -58,7 +58,7 @@
                                                         <td>@item.Name</td>
                                                         <td>
                                                             <a class="btn btn-outline-danger" asp-area="Setup" asp-controller="ExpensesC" asp-action="Delete"
-                                                               asp-route-id="@item.Id">
+                                                               asp-route-id="@item.Id" onclick="alert('Are you sure?')">
                                                                 <i class="fa fa-trash"></i>
                                                                 Remove
                                                             </a>

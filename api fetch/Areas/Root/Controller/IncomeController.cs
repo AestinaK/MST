@@ -87,4 +87,20 @@ public class IncomeController : Microsoft.AspNetCore.Mvc.Controller
             _notyfService.Success("Added!");
         return RedirectToAction(nameof(Add));
     }
+
+    public async Task<IActionResult> Delete(long id)
+    {
+        try
+        {
+            await _incomeService.Delete(id);
+            _notyfService.Success("Delete!");
+        }
+        catch (Exception e)
+        {
+           _notyfService.Error(e.Message);
+           return Redirect("/");
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
 }
