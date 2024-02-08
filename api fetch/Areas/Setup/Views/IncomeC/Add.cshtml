@@ -33,6 +33,48 @@
                     </div>
                 </div>
             </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="panel panel-info">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="scroll-v">
+                                        <table class="table table-condensed table-hover ">
+                                            <thead>
+                                            <tr>
+                                                <th>S.N</th>
+                                                <th>Category</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @{
+                                                int i = 1;
+                                                foreach (var item in Model.Categories)
+                                                {
+                                                    <tr>
+                                                        <td>@(i++)</td>
+                                                        <td>@item.Name</td>
+                                                        <td>
+                                                            <a class="btn btn-outline-danger" asp-area="Setup" asp-controller="IncomeC" asp-action="Delete"
+                                                               asp-route-id="@item.Id">
+                                                                <i class="fa fa-trash"></i>
+                                                                Remove
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 </div>

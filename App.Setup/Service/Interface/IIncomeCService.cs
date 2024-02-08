@@ -6,4 +6,5 @@ namespace App.Setup.Service.Interface;
 public interface IIncomeCService
 {
     Task<IncomeCategory> CreateIncomeCategory(IncomeCDto dto);
+    Task<IncomeCategory> Delete(long id);
 }
