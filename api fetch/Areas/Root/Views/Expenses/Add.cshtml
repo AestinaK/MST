@@ -17,7 +17,7 @@
                                         <div class="form-group">
                                             <label asp-for="Expenses"></label>
                                             <select class="form-control chosen" asp-for="Expenses" asp-items="@Model.GetCategories()">
-                                                <option>--Select--</option>
+                                                <option value="">--Select--</option>
                                             </select>
                                         </div>
                                     </div>

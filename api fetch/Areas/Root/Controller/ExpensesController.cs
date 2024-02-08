@@ -60,7 +60,7 @@ public class ExpensesController : Microsoft.AspNetCore.Mvc.Controller
     public async Task<IActionResult> Add()
     {
         var vm = new ExpensesVm();
-        vm.Date = DateTime.Today.ToUniversalTime();
+        vm.Date = DateTime.Today;
         vm.Categories = await _expensesCRepo.GetAllAsync();
         return View(vm);
     }

@@ -1,7 +1,4 @@
 using App.Expenses.Enum;
-using App.Expenses.Model;
-using App.Expenses.Repository;
-using App.Setup.Model;
 
 namespace api_fetch.Areas.Root.ViewModel.Expenses;
 

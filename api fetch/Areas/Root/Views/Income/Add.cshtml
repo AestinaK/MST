@@ -1,5 +1,6 @@
+@model api_fetch.Areas.Root.ViewModel.Income.IncomeVm
 <div class="main-container">
-    <form>
+    <form method="post">
         <div class="row">
             <div class="col-8">
                 <div class="card">
@@ -12,28 +13,28 @@
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label></label>
-                                            <input type="text" class="form-control"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label></label>
-                                            <select name="" id="" class="form-control chosen">
-                                                <option>--Select Source--</option>
+                                            <label asp-for="CategoryId"></label>
+                                            <select name="CategoryId" asp-for="CategoryId" asp-items="@Model.GetIncome()" class="form-control chosen">
+                                                <option value="">--Select Source--</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label></label>
-                                            <input type="text" class="form-control"/>
+                                            <label asp-for="Amount"></label>
+                                            <input type="text" asp-for="Amount" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label asp-for="Date"></label>
+                                             <vc:date-input value="@Model.Date" name="Date"  required="true"/>
                                         </div>
                                     </div>
                                     <div class="col-8">
                                         <div class="form-group">
-                                            <label></label>
-                                            <input type="text" class="form-control"/>
+                                            <label asp-for="Description"></label>
+                                            <input type="text" asp-for="Description" class="form-control"/>
                                         </div>
                                     </div>
                                 </div>

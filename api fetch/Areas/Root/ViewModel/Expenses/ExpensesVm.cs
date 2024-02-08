@@ -13,7 +13,7 @@ public class ExpensesVm
     
     [Display(Name = "Select Status")]
     public PaymentStatus  Status { get; set; }
-    public DateTime Date { get; set; } = DateTime.UtcNow;
+    public DateTime Date { get; set; }
     public long UserId { get; set; }
     
     public List<ExpensesCategory> Categories { get; set; }
