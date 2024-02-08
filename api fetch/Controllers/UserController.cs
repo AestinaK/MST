@@ -38,7 +38,7 @@ namespace api_fetch.Controllers
 					Password = vm.Password,
 				};
 				_userService.CreateUser(user);
-				_notyfService.Success("User Added!");
+				_notyfService.Success("Welcome!");
 				
 			}catch (Exception ex)
 			{

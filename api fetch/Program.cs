@@ -12,6 +12,7 @@ using DateConverter.Converters;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Pioneer.Pagination;
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 var builder = WebApplication.CreateBuilder(args);
@@ -40,7 +41,8 @@ builder.Services.UserConfiguration()
 builder.Services.AddScoped<DbContext, ApplicationDbContext>()
     .AddScoped<IAuthManager, AuthManager>()
     .AddHttpContextAccessor()
-    .AddScoped<IUserProvider,UserProvider>();
+    .AddScoped<IUserProvider,UserProvider>()
+    .AddTransient<IPaginatedMetaService,PaginatedMetaService>();
 
 var app = builder.Build();
 

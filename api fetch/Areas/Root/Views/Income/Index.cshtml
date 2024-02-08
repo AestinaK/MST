@@ -1,14 +1,16 @@
+@model api_fetch.Areas.Root.ViewModel.Income.IncomeSearchVm
+
 <div class="main-container">
     <div class="row">
         <div class="col-12">
-            <form method="post">
+            <form method="get">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-2">
                                 <div class="form-group">
-                                    <label></label>
-                                    <vc:date-input value="DateTime.Today"/>
+                                    <label asp-for="Date"></label>
+                                    <vc:date-input name="Date" value="@Model.Date"/>
                                 </div>
                             </div>
                             <div class="col-2">
@@ -16,6 +18,7 @@
                                     <label>&nbsp;</label>
                                     <button class="btn btn-primary btn-block">
                                         <i class="fa fa-search"></i>
+                                        Search
                                     </button>
                                 </div>
                             </div>
@@ -47,24 +50,31 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <a class="btn btn-success">
-                                    <i class="fa fa-pencil-square-o"></i>
-                                    Update
-                                </a>
-                                <a class="btn btn-danger">
-                                    <i class="fa fa-trash-o"></i>
-                                    Update
-                                </a>
-                            </td>
-                        </tr>
+                        @{
+                            int i = 1;
+                            foreach (var item in Model.Incomes)
+                            {
+                                <tr>
+                                    <td>@(i++)</td>
+                                    <td>@item.Source</td>
+                                    <td>@item.Amount</td>
+                                    <td>@item.Date</td>
+                                    <td>
+                                        <a class="btn btn-success">
+                                            <i class="fa fa-pencil-square-o"></i>
+                                            Update
+                                        </a>
+                                        <a class="btn btn-danger">
+                                            <i class="fa fa-trash-o"></i>
+                                            Update
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
                         </tbody>
                     </table>
+                    <vc:paginator result="Model.Incomes.Info"/>
                 </div>
             </div>
         </div>
