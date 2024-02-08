@@ -6,4 +6,5 @@ namespace App.Setup.Service.Interface;
 public interface IExpensesCService
 {
     Task<ExpensesCategory> CreateExpenses(ExpensesCDto dto);
+    Task<ExpensesCategory> Delete(long id);
 }

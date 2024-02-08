@@ -6,17 +6,17 @@
             <div class="col-6">
                 <div class="card">
                     <div class="card-header">
-                       <strong class="card-title">Add Expenses category</strong> 
+                        <strong class="card-title">Add Expenses category</strong>
                     </div>
                     <div class="card-body">
-                            <div class="form-group">
-                                <label asp-for="Name"></label>
-                                <input asp-for="Name" type="text" class="form-control" required />
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Description"></label>
-                                <textarea asp-for="Description" class="form-control" rows="5" ></textarea>
-                            </div>
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" type="text" class="form-control" required/>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description"></label>
+                            <textarea asp-for="Description" class="form-control" rows="5" ></textarea>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <div class="row">
@@ -28,7 +28,49 @@
                                         Save
                                     </button>
                                 </div>
-                            </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="panel panel-info">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="scroll-v">
+                                        <table class="table table-condensed table-hover ">
+                                            <thead>
+                                            <tr>
+                                                <th>S.N</th>
+                                                <th>Category</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @{
+                                                int i = 1;
+                                                foreach (var item in Model.Categories)
+                                                {
+                                                    <tr>
+                                                        <td>@(i++)</td>
+                                                        <td>@item.Name</td>
+                                                        <td>
+                                                            <a class="btn btn-outline-danger" asp-area="Setup" asp-controller="ExpensesC" asp-action="Delete"
+                                                               asp-route-id="@item.Id">
+                                                                <i class="fa fa-trash"></i>
+                                                                Remove
+                                                            </a>
+                                                        </td>
+                                                    </tr>    
+                                                }
+                                            }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
