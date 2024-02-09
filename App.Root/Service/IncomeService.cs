@@ -17,6 +17,7 @@ public class IncomeService : IIncomeService
         _uow = uow;
         _incomeRecordRepo = incomeRecordRepo;
     }
+
     public async Task<IncomeRecord> Create(IncomeDto dto)
     {
         var income = new IncomeRecord();
@@ -34,6 +35,18 @@ public class IncomeService : IIncomeService
     {
         var data = await _incomeRecordRepo.FindAsync(id);
         _uow.Remove(data);
+        await _uow.CommitAsync();
+        return data;
+    }
+
+    public async Task<IncomeRecord> Update(IncomeUpdateDto dto)
+    {
+        var data = await _incomeRecordRepo.FindAsync(dto.Id);
+        data.Amount = dto.Amount;
+        data.Description = dto.Description;
+        data.CategoryId = dto.CategoryId;
+        data.Date = dto.Date;
+        _uow.Update(data);
         await _uow.CommitAsync();
         return data;
     }

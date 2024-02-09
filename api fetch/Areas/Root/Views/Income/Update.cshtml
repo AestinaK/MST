@@ -1,12 +1,11 @@
-@using App.Expenses.Enum
-@model api_fetch.Areas.Root.ViewModel.Expenses.UpdateExpVm
+@model api_fetch.Areas.Root.ViewModel.Income.UpdateIncomeVm
 <div class="main-container">
     <form method="post">
         <div class="row">
             <div class="col-8">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Update Expenses</strong>
+                        <strong>Update Income</strong>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -14,9 +13,9 @@
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label asp-for="ExpensesId"></label>
-                                            <select class="form-control chosen" asp-for="ExpensesId" asp-items="@Model.GetCategories()">
-                                                <option value="">--Select--</option>
+                                            <label>Category</label>
+                                            <select name="CategoryId" asp-for="CategoryId" asp-items="@Model.GetIncome()" class="form-control chosen">
+                                                <option value="">--Select Source--</option>
                                             </select>
                                         </div>
                                     </div>
@@ -28,22 +27,14 @@
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label asp-for="Status"></label>
-                                            <select asp-for="Status" asp-items="@Html.GetEnumSelectList<PaymentStatus>()" class="form-control chosen">
-                                              <option>--Select--</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
                                             <label asp-for="Date"></label>
-                                            <vc:date-input value="@Model.Date" name="Date"  required="true"/>
+                                             <vc:date-input value="@Model.Date" name="Date"  required="true"/>
                                         </div>
                                     </div>
                                     <div class="col-8">
                                         <div class="form-group">
                                             <label asp-for="Description"></label>
-                                            <input type="text" asp-for="Description"  class="form-control"/>
+                                            <input type="text" asp-for="Description" class="form-control"/>
                                         </div>
                                     </div>
                                 </div>

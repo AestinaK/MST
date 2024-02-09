@@ -88,12 +88,48 @@ public class IncomeController : Microsoft.AspNetCore.Mvc.Controller
         return RedirectToAction(nameof(Add));
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Update(long id)
+    {
+        var vm = new UpdateIncomeVm();
+        var data = await _incomeRecordRepo.FindAsync(id);
+        vm.Date = data.Date;
+        vm.CategoryId = data.CategoryId;
+        vm.Amount = data.Amount;
+        vm.IncomeCategories = await _incomeCRepo.GetAllAsync();
+        vm.Description = data.Description;
+        return View(vm);
+    }
+
+    public async Task<IActionResult> Update(UpdateIncomeVm vm)
+    {
+        try
+        {
+            var dto = new IncomeUpdateDto()
+            {
+                Id = vm.Id,
+                Amount = vm.Amount,
+                CategoryId = vm.CategoryId,
+                Description = vm.Description,
+                Date = vm.Date
+            };
+            await _incomeService.Update(dto);
+            _notyfService.Success("Updated");
+        }
+        catch (Exception e)
+        {
+          _notyfService.Error(e.Message);
+          return Redirect("/");
+        }
+        return RedirectToAction(nameof(Update));
+    }
+
     public async Task<IActionResult> Delete(long id)
     {
         try
         {
             await _incomeService.Delete(id);
-            _notyfService.Success("Delete!");
+            _notyfService.Success("Deleted!");
         }
         catch (Exception e)
         {

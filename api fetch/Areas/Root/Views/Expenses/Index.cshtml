@@ -67,7 +67,8 @@
                                     <td>@item.Amount</td>
                                     <td>@item.Date</td>
                                     <td>
-                                        <a class="btn btn-success" asp-controller="Expenses" asp-action="Update" asp-area="Root">
+                                        <a class="btn btn-success" asp-controller="Expenses" asp-action="Update" asp-area="Root"
+                                           asp-route-id="@item.Id">
                                             <i class="fa fa-pencil-square-o"></i>
                                             Update
                                         </a>
@@ -82,6 +83,7 @@
                         }
                         </tbody>
                     </table>
+                    <vc:paginator result="@Model.ExpensesCategories.Info"/>
                 </div>
             </div>
         </div>

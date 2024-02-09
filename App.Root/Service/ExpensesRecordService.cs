@@ -39,4 +39,17 @@ public class ExpensesRecordService : IExpensesRecordService
         await _uow.CommitAsync();
         return data;
     }
+
+    public async Task<ExpensesRecord> Update(ExpUpdateDto dto)
+    {
+        var data = await _expensesRecordRepo.FindAsync(dto.Id);
+        data.ExpensesId = dto.ExpensesId;
+        data.Amount = dto.Amount;
+        data.TxnDate = dto.TxnDate;
+        data.Description = dto.Descrption;
+        data.Status = dto.Status;
+        _uow.Update(data);
+        await _uow.CommitAsync();
+        return data;
+    }
 }
