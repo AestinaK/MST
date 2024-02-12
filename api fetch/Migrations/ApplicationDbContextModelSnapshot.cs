@@ -22,65 +22,6 @@ namespace api_fetch.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("api_fetch.Models.Employee", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<string>("Adress")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Contact")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("RecDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<long>("RoleId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("RolesId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RolesId");
-
-                    b.ToTable("employees");
-                });
-
-            modelBuilder.Entity("api_fetch.Models.Roles", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("RecDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("roles");
-                });
-
             modelBuilder.Entity("App.Expenses.Model.ExpensesRecord", b =>
                 {
                     b.Property<long>("Id")
@@ -101,6 +42,10 @@ namespace api_fetch.Migrations
                     b.Property<DateTime>("RecDate")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<char>("RecStatus")
+                        .HasMaxLength(1)
+                        .HasColumnType("character(1)");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("text");
@@ -117,7 +62,7 @@ namespace api_fetch.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Expenses_Record", "Root");
+                    b.ToTable("expenses_Record", "root");
                 });
 
             modelBuilder.Entity("App.Expenses.Model.IncomeRecord", b =>
@@ -143,6 +88,10 @@ namespace api_fetch.Migrations
                     b.Property<DateTime>("RecDate")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<char>("RecStatus")
+                        .HasMaxLength(1)
+                        .HasColumnType("character(1)");
+
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
@@ -152,7 +101,7 @@ namespace api_fetch.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("income_record", "Root");
+                    b.ToTable("income_record", "root");
                 });
 
             modelBuilder.Entity("App.Setup.Model.ExpensesCategory", b =>
@@ -172,6 +121,10 @@ namespace api_fetch.Migrations
 
                     b.Property<DateTime>("RecDate")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<char>("RecStatus")
+                        .HasMaxLength(1)
+                        .HasColumnType("character(1)");
 
                     b.HasKey("Id");
 
@@ -195,6 +148,10 @@ namespace api_fetch.Migrations
 
                     b.Property<DateTime>("RecDate")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<char>("RecStatus")
+                        .HasMaxLength(1)
+                        .HasColumnType("character(1)");
 
                     b.HasKey("Id");
 
@@ -228,20 +185,13 @@ namespace api_fetch.Migrations
                     b.Property<DateTime>("RecDate")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<char>("RecStatus")
+                        .HasMaxLength(1)
+                        .HasColumnType("character(1)");
+
                     b.HasKey("Id");
 
                     b.ToTable("users");
-                });
-
-            modelBuilder.Entity("api_fetch.Models.Employee", b =>
-                {
-                    b.HasOne("api_fetch.Models.Roles", "Roles")
-                        .WithMany()
-                        .HasForeignKey("RolesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Roles");
                 });
 
             modelBuilder.Entity("App.Expenses.Model.ExpensesRecord", b =>

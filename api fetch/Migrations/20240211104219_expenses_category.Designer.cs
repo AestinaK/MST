@@ -12,7 +12,7 @@ using api_fetch.Data;
 namespace api_fetch.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240202075324_expenses_category")]
+    [Migration("20240211104219_expenses_category")]
     partial class expenses_category
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,65 +24,6 @@ namespace api_fetch.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("api_fetch.Models.Employee", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<string>("Adress")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Contact")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("RecDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<long>("RoleId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("RolesId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RolesId");
-
-                    b.ToTable("employees");
-                });
-
-            modelBuilder.Entity("api_fetch.Models.Roles", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("RecDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("roles");
-                });
-
             modelBuilder.Entity("App.Setup.Model.ExpensesCategory", b =>
                 {
                     b.Property<long>("Id")
@@ -92,7 +33,6 @@ namespace api_fetch.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -100,7 +40,11 @@ namespace api_fetch.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("RecDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<char>("RecStatus")
+                        .HasMaxLength(1)
+                        .HasColumnType("character(1)");
 
                     b.HasKey("Id");
 
@@ -132,22 +76,15 @@ namespace api_fetch.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("RecDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<char>("RecStatus")
+                        .HasMaxLength(1)
+                        .HasColumnType("character(1)");
 
                     b.HasKey("Id");
 
                     b.ToTable("users");
-                });
-
-            modelBuilder.Entity("api_fetch.Models.Employee", b =>
-                {
-                    b.HasOne("api_fetch.Models.Roles", "Roles")
-                        .WithMany()
-                        .HasForeignKey("RolesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Roles");
                 });
 #pragma warning restore 612, 618
         }

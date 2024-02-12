@@ -11,7 +11,7 @@ using api_fetch.Data;
 namespace api_fetch.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240125050826_initial")]
+    [Migration("20240211103957_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

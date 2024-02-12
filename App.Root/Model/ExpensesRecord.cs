@@ -6,7 +6,7 @@ using App.Setup.Model;
 
 namespace App.Expenses.Model;
 
-[Table("Expenses_Record",Schema = SchemaConstants.Root)]
+[Table("expenses_Record",Schema = SchemaConstants.Root)]
 public class ExpensesRecord : GenericModel
 {
     public virtual User.Model.User User { get; set; }

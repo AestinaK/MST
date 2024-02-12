@@ -3,6 +3,7 @@ using api_fetch.Provider.Interface;
 using App.Base.Extensions;
 using App.Base.ValueObject;
 using App.Expenses.Dto;
+using App.Expenses.Providers.Interface;
 using App.Expenses.Repository.Interface;
 using App.Expenses.Service.Interface;
 using App.Setup.Repository.Interface;
@@ -19,56 +20,53 @@ public class ExpensesController : Microsoft.AspNetCore.Mvc.Controller
     private readonly IUserProvider _userPro;
     private readonly IExpensesRecordService _expensesRecordService;
     private readonly INotyfService _notyfService;
-    private readonly IIncomeCRepository _incomeCRepository;
     private readonly IExpensesRecordRepository _expensesRecordRepo;
+    private readonly IExpensesProvider _expensesProvider;
 
     public ExpensesController(IExpensesCRepository expensesCRepo,
         IUserProvider userPro,
         IExpensesRecordService expensesRecordService,
         INotyfService notyfService,
-        IIncomeCRepository incomeCRepository,
-        IExpensesRecordRepository expensesRecordRepo)
+        IExpensesRecordRepository expensesRecordRepo,
+        IExpensesProvider expensesProvider)
     {
         _expensesCRepo = expensesCRepo;
         _userPro = userPro;
         _expensesRecordService = expensesRecordService;
         _notyfService = notyfService;
-        _incomeCRepository = incomeCRepository;
         _expensesRecordRepo = expensesRecordRepo;
+        _expensesProvider = expensesProvider;
     }
-
-    // GET
-    [HttpGet]
-    public async Task<IActionResult> Index()
+    
+    public async Task<IActionResult> Index(ExpensesSearchVm vm)
     {
-        var vm = new ExpensesSearchVm();
-        vm.ExpensesCategories = await FilterVm(vm);
+        vm.Categories = await _expensesProvider.GetExpensesList(vm.Date);
         return View(vm);
     }
 
-    public async Task<PagedResult<ExpensesInfoVm>> FilterVm(ExpensesSearchVm vm)
-    {
-        var expenses = _expensesCRepo.GetQueryable();
-        var data = _expensesRecordRepo.GetQueryable().Where(x => x.TxnDate <= vm.Date);
-        var result = await (from d in data
-            join e in expenses on d.ExpensesId equals e.Id
-            select new ExpensesInfoVm()
-            {
-                Id = d.Id,
-                Amount = d.Amount,
-                Category = e.Name,
-                Date = d.TxnDate,
-                Status = d.Status
-            }).PaginateAsync(vm.Page, vm.Limit);
-        return result;
-    }
+    // public async Task<PagedResult<ExpensesInfoVm>> FilterVm(ExpensesSearchVm vm)
+    // {
+    //     var expenses = _expensesCRepo.GetQueryable();
+    //     var data = _expensesRecordRepo.GetQueryable().Where(x => x.TxnDate <= vm.Date);
+    //     var result = await (from d in data
+    //         join e in expenses on d.ExpensesId equals e.Id
+    //         select new ExpensesInfoVm()
+    //         {
+    //             Id = d.Id,
+    //             Amount = d.Amount,
+    //             Category = e.Name,
+    //             Date = d.TxnDate,
+    //             Status = d.Status
+    //         }).PaginateAsync(vm.Page, vm.Limit);
+    //     return result;
+    // }
 
     [HttpGet]
     public async Task<IActionResult> Add()
     {
-        var vm = new ExpensesVm();
-        vm.Date = DateTime.Today;
-        vm.Categories = await _expensesCRepo.GetAllAsync();
+         var vm = new ExpensesVm();
+         vm.Date = DateTime.Today;
+         vm.Categories = await _expensesCRepo.GetAllAsync();
         return View(vm);
     }
 
@@ -87,10 +85,10 @@ public class ExpensesController : Microsoft.AspNetCore.Mvc.Controller
         };
         await _expensesRecordService.CreateExpensesRecord(dto);
         _notyfService.Success("Added!");
-
+    
         return RedirectToAction(nameof(Add));
     }
-
+    
     [HttpGet]
     public async Task<IActionResult> Update(long id)
     {
@@ -104,7 +102,7 @@ public class ExpensesController : Microsoft.AspNetCore.Mvc.Controller
         vm.Status = data.Status;
         return View(vm);
     }
-
+    
     [HttpPost]
     public async Task<IActionResult> Update(UpdateExpVm vm)
     {
@@ -127,10 +125,10 @@ public class ExpensesController : Microsoft.AspNetCore.Mvc.Controller
             _notyfService.Error(e.Message);
             return Redirect("/");
         }
-
+    
         return RedirectToAction(nameof(Update));
     }
-
+    
     public async Task<IActionResult> Delete(long id)
     {
         try
@@ -143,7 +141,7 @@ public class ExpensesController : Microsoft.AspNetCore.Mvc.Controller
             _notyfService.Error(e.Message);
             return Redirect("/");
         }
-
+    
         return RedirectToAction(nameof(Index));
     }
 }

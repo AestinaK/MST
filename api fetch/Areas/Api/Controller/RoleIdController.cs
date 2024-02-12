@@ -14,20 +14,21 @@ public class RoleIdController : Microsoft.AspNetCore.Mvc.Controller
     
     public async Task<IActionResult> GetRoleById(long roleId)
     {
-        try
-        {
-            var roles = await _context.roles.FindAsync(roleId);
-            var res = new
-            {
-                Id = roles.Id,
-                Name = roles.Name
-            };
-
-            return Ok(roles);
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e);
-        }
+        return Ok();
+        // try
+        // {
+        //     var roles = await _context.roles.FindAsync(roleId);
+        //     var res = new
+        //     {
+        //         Id = roles.Id,
+        //         Name = roles.Name
+        //     };
+        //
+        //     return Ok(roles);
+        // }
+        // catch (Exception e)
+        // {
+        //     return BadRequest(e);
+        // }
     }
 }

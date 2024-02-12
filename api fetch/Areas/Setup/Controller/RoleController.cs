@@ -22,7 +22,7 @@ public class RoleController : Microsoft.AspNetCore.Mvc.Controller
     [HttpGet]
     public IActionResult Index(RoleVm vm)
     {
-        vm.RolesList = _context.roles.ToList();
+       // vm.RolesList = _context.roles.ToList();
         return View(vm);
     }
     [HttpGet]
@@ -35,22 +35,22 @@ public class RoleController : Microsoft.AspNetCore.Mvc.Controller
     [HttpPost]
     public IActionResult Add(RoleVm vm)
     {
-        try
-        {
-            var role = new Roles()
-            {
-                Name = vm.Name,
-                Description = vm.Description
-            };
-            _context.roles.Add(role);
-            _context.SaveChanges();
-			_notyfService.Success("Added");
-		}
-        catch (Exception e)
-        {
-            _notyfService.Error(e.Message);
-            return Redirect("/");
-        }
+  //       try
+  //       {
+  //           var role = new Roles()
+  //           {
+  //               Name = vm.Name,
+  //               Description = vm.Description
+  //           };
+  //           _context.roles.Add(role);
+  //           _context.SaveChanges();
+		// 	_notyfService.Success("Added");
+		// }
+  //       catch (Exception e)
+  //       {
+  //           _notyfService.Error(e.Message);
+  //           return Redirect("/");
+  //       }
         return RedirectToAction(nameof(Index));
 
     }

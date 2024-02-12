@@ -6,7 +6,7 @@ public static class EntityRegistrar
 {
      public static ModelBuilder AddUser(this ModelBuilder builder)
      {
-         builder.Entity<Model.User>();
+        builder.Entity<Model.User>();
          return builder;
      }
 }

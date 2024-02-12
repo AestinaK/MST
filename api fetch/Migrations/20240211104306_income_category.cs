@@ -6,19 +6,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace api_fetch.Migrations
 {
-    public partial class incomeCategory : Migration
+    public partial class income_category : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<string>(
-                name: "Description",
-                schema: "setup",
-                table: "expenses_category",
-                type: "text",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text");
-
             migrationBuilder.CreateTable(
                 name: "income_category",
                 schema: "setup",
@@ -28,7 +19,8 @@ namespace api_fetch.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    RecDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    RecDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    RecStatus = table.Column<char>(type: "character(1)", maxLength: 1, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,17 +33,6 @@ namespace api_fetch.Migrations
             migrationBuilder.DropTable(
                 name: "income_category",
                 schema: "setup");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Description",
-                schema: "setup",
-                table: "expenses_category",
-                type: "text",
-                nullable: false,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
         }
     }
 }

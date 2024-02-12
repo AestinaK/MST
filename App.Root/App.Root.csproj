@@ -7,19 +7,14 @@
         <RootNamespace>App.Expenses</RootNamespace>
     </PropertyGroup>
 
-
     <ItemGroup>
-      <ProjectReference Include="..\App.Base\App.Base.csproj" />
-      <ProjectReference Include="..\App.Setup\App.Setup.csproj" />
-      <ProjectReference Include="..\App.User\App.User.csproj" />
+        <ProjectReference Include="..\App.Base\App.Base.csproj" />
+        <ProjectReference Include="..\App.Setup\App.Setup.csproj" />
+        <ProjectReference Include="..\App.User\App.User.csproj" />
     </ItemGroup>
 
-
-
-
-
-
-
-
+    <ItemGroup>
+        <PackageReference Include="Dapper" Version="2.1.28" />
+    </ItemGroup>
 
 </Project>

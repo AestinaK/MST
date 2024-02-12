@@ -20,6 +20,6 @@ public class ExpensesVm
     public List<ExpensesCategory> Categories { get; set; }
 
     public SelectList GetCategories() =>
-        new SelectList(Categories, nameof(ExpensesCategory.Id), nameof(ExpensesCategory.Name));
+        new SelectList(Categories, nameof(ExpensesCategory.Id), nameof(ExpensesCategory.Name),Expenses);
 
 }

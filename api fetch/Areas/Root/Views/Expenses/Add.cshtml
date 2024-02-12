@@ -1,6 +1,9 @@
 @model api_fetch.Areas.Root.ViewModel.Expenses.ExpensesVm
 @using App.Expenses.Enum
-
+@section ToolBar
+{
+    <partial name="_ToolBar"/>
+}
 <div class="main-container">
     <form method="post">
         <div class="row">

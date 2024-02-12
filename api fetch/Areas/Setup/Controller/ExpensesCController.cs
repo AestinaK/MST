@@ -22,9 +22,7 @@ public class ExpensesCController : Microsoft.AspNetCore.Mvc.Controller
         _notyfService = notyfService;
         _expensesCRepo = expensesCRepo;
     }
-
     
-    // GET
     [HttpGet]
     public async Task<IActionResult> Add()
     {
@@ -32,7 +30,7 @@ public class ExpensesCController : Microsoft.AspNetCore.Mvc.Controller
         vm.Categories = await _expensesCRepo.GetAllAsync();
         return View(vm);
     }
-
+    
     [HttpPost]
     public async Task<IActionResult> Add(ExpensesCVm vm)
     {
@@ -52,9 +50,9 @@ public class ExpensesCController : Microsoft.AspNetCore.Mvc.Controller
             return Redirect("/");
         }
         return RedirectToAction(nameof(Add));
-
+    
     }
-
+    
     public async Task<IActionResult> Delete(long id)
     {
         try

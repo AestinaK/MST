@@ -6,7 +6,7 @@ using App.Setup.Model;
 namespace App.Expenses.Model;
 
 [Table("income_record",Schema = SchemaConstants.Root)]
-public class IncomeRecord :GenericModel
+public class IncomeRecord :GenericModel, IUserModel
 {
     public virtual User.Model.User User { get; set; }
     public long UserId { get; set; }    

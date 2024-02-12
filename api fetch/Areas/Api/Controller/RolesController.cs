@@ -15,14 +15,15 @@ public class RolesController : Microsoft.AspNetCore.Mvc.Controller
     [HttpGet("/Api/Roles/GetRoles")]
     public ActionResult<IEnumerable<Roles>> GetRoles()
     {
-        try
-        {
-            var roles = _context.roles.ToList();
-            return Ok(roles);
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e);
-        }
+        return Ok();
+        // try
+        // {
+        //     var roles = _context.roles.ToList();
+        //     return Ok(roles);
+        // }
+        // catch (Exception e)
+        // {
+        //     return BadRequest(e);
+        // }
     }
 }

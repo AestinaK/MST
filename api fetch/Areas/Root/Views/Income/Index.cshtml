@@ -1,5 +1,8 @@
 @model api_fetch.Areas.Root.ViewModel.Income.IncomeSearchVm
-
+@section ToolBar
+{
+    <partial name="_ToolBar"/>
+}
 <div class="main-container">
     <div class="row">
         <div class="col-12">
@@ -56,7 +59,7 @@
                             {
                                 <tr>
                                     <td>@(i++)</td>
-                                    <td>@item.Source</td>
+                                    <td>@item.Name</td>
                                     <td>@item.Amount</td>
                                     <td>@item.Date</td>
                                     <td>
@@ -76,7 +79,7 @@
                         }
                         </tbody>
                     </table>
-                    <vc:paginator result="Model.Incomes.Info"/>
+                    @* <vc:paginator result="Model.Incomes.Info"/> *@
                 </div>
             </div>
         </div>

@@ -22,7 +22,7 @@ public class IncomeCController : Microsoft.AspNetCore.Mvc.Controller
         _notyfService = notyfService;
         _incomeCRepo = incomeCRepo;
     }
-
+    
     [HttpGet]
     // GET
     public async Task<IActionResult> Add()
@@ -31,7 +31,7 @@ public class IncomeCController : Microsoft.AspNetCore.Mvc.Controller
         vm.Categories = await _incomeCRepo.GetAllAsync();
         return View(vm);
     }
-
+    
     [HttpPost]
     public async Task<IActionResult> Add(IncomeCVm vm)
     {
@@ -52,7 +52,7 @@ public class IncomeCController : Microsoft.AspNetCore.Mvc.Controller
         }
         return RedirectToAction(nameof(Add));
     }
-
+    
     public async Task<IActionResult> Delete(long id)
     {
         try
@@ -65,7 +65,7 @@ public class IncomeCController : Microsoft.AspNetCore.Mvc.Controller
            _notyfService.Error(e.Message);
            return Redirect("/");
         }
-
+    
         return RedirectToAction(nameof(Add));
     }
 }

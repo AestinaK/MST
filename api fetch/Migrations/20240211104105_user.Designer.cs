@@ -12,8 +12,8 @@ using api_fetch.Data;
 namespace api_fetch.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240125051251_roles")]
-    partial class roles
+    [Migration("20240211104105_user")]
+    partial class user
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace api_fetch.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("api_fetch.Models.Roles", b =>
+            modelBuilder.Entity("App.User.Model.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,19 +32,32 @@ namespace api_fetch.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("RecDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<char>("RecStatus")
+                        .HasMaxLength(1)
+                        .HasColumnType("character(1)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("roles");
+                    b.ToTable("users");
                 });
 #pragma warning restore 612, 618
         }

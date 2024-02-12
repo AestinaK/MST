@@ -28,8 +28,7 @@ namespace api_fetch.Controllers
 		[HttpPost]
 		public IActionResult Register(UserAddVm vm)
 		{
-			try
-			{
+			
 				var user = new CreateUserDto()
 				{
 					UserName = vm.UserName,
@@ -39,11 +38,7 @@ namespace api_fetch.Controllers
 				};
 				_userService.CreateUser(user);
 				_notyfService.Success("Welcome!");
-				
-			}catch (Exception ex)
-			{
-				throw new Exception(ex.Message);
-			}
+            
 			return RedirectToAction(nameof(Register));
 		}
 	}

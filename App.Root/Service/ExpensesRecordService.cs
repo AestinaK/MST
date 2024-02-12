@@ -22,7 +22,7 @@ public class ExpensesRecordService : IExpensesRecordService
     {
         var expenses = new ExpensesRecord();
         expenses.ExpensesId = dto.ExpensesId;
-        expenses.UserId = dto.ExpensesId;
+        expenses.UserId = dto.UserId;
         expenses.Amount = dto.Amount;
         expenses.TxnDate = dto.TxnDate;
         expenses.Status = dto.Status;

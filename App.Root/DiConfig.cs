@@ -1,3 +1,5 @@
+using App.Expenses.Providers;
+using App.Expenses.Providers.Interface;
 using App.Expenses.Repository;
 using App.Expenses.Repository.Interface;
 using App.Expenses.Service;
@@ -15,6 +17,9 @@ public static class DiConfig
 
         service.AddScoped<IExpensesRecordService, ExpensesRecordService>();
         service.AddScoped<IIncomeService, IncomeService>();
+
+        service.AddScoped<IExpensesProvider, ExpensesProvider>();
+        service.AddScoped<IIncomeProvider, IncomeProvider>();
         return service;
     }
 }

@@ -10,5 +10,5 @@ public static class EntityRegistrar
         builder.Entity<ExpensesCategory>();
         builder.Entity<IncomeCategory>();
         return builder;
-    } 
+    }
 }

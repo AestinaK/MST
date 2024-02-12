@@ -46,6 +46,13 @@ builder.Services.AddScoped<DbContext, ApplicationDbContext>()
 
 var app = builder.Build();
 
+app.Services.CreateScope().ServiceProvider.GetService<ApplicationDbContext>()?.Database.Migrate();
+
+app.UseCookiePolicy(new CookiePolicyOptions()
+{
+    MinimumSameSitePolicy = SameSiteMode.Lax,
+            
+});
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

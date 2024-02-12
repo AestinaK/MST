@@ -6,39 +6,37 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace api_fetch.Migrations
 {
-    public partial class expensesRecord : Migration
+    public partial class income_record : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "Root");
-
             migrationBuilder.CreateTable(
-                name: "Expenses_Record",
-                schema: "Root",
+                name: "income_record",
+                schema: "root",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    TxnDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CategoryId = table.Column<long>(type: "bigint", nullable: false),
                     Amount = table.Column<decimal>(type: "numeric", nullable: false),
-                    ExpensesId = table.Column<long>(type: "bigint", nullable: false),
-                    Status = table.Column<string>(type: "text", nullable: false),
-                    RecDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    RecDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    RecStatus = table.Column<char>(type: "character(1)", maxLength: 1, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Expenses_Record", x => x.Id);
+                    table.PrimaryKey("PK_income_record", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Expenses_Record_expenses_category_ExpensesId",
-                        column: x => x.ExpensesId,
+                        name: "FK_income_record_income_category_CategoryId",
+                        column: x => x.CategoryId,
                         principalSchema: "setup",
-                        principalTable: "expenses_category",
+                        principalTable: "income_category",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Expenses_Record_users_UserId",
+                        name: "FK_income_record_users_UserId",
                         column: x => x.UserId,
                         principalTable: "users",
                         principalColumn: "Id",
@@ -46,23 +44,23 @@ namespace api_fetch.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Expenses_Record_ExpensesId",
-                schema: "Root",
-                table: "Expenses_Record",
-                column: "ExpensesId");
+                name: "IX_income_record_CategoryId",
+                schema: "root",
+                table: "income_record",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Expenses_Record_UserId",
-                schema: "Root",
-                table: "Expenses_Record",
+                name: "IX_income_record_UserId",
+                schema: "root",
+                table: "income_record",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Expenses_Record",
-                schema: "Root");
+                name: "income_record",
+                schema: "root");
         }
     }
 }

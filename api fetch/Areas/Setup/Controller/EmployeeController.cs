@@ -30,25 +30,25 @@ public class EmployeeController : Microsoft.AspNetCore.Mvc.Controller
     [HttpPost]
     public IActionResult Add(EmployeeVm vm)
     {
-        try
-        {
-            var employee = new Employee()
-            {
-                Name = vm.Name,
-                Adress = vm.Address,
-                Contact = vm.Contact,
-                RoleId = vm.RoleId
-            };
-
-            _context.employees.Add(employee);
-            _context.SaveChanges();
-			_notyfService.Success("Added");
-		}
-        catch (Exception e)
-        {
-            _notyfService.Error(e.Message);
-            return Redirect("/");
-        }
+  //       try
+  //       {
+  //           var employee = new Employee()
+  //           {
+  //               Name = vm.Name,
+  //               Adress = vm.Address,
+  //               Contact = vm.Contact,
+  //               RoleId = vm.RoleId
+  //           };
+  //
+  //           _context.employees.Add(employee);
+  //           _context.SaveChanges();
+		// 	_notyfService.Success("Added");
+		// }
+  //       catch (Exception e)
+  //       {
+  //           _notyfService.Error(e.Message);
+  //           return Redirect("/");
+  //       }
         return RedirectToAction(nameof(Add));
     }
 }

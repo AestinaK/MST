@@ -21,6 +21,43 @@
     <link rel="stylesheet" href="~/css/mst_dark.css" asp-append-version="true"/>
 
     <partial name="_DataTableCSS"/>
+    <style>
+        .titlebar {
+          position: fixed;
+          top: 36px;
+          left: 0;
+          right: 0;
+          height: 45px;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+          background-color: #343a40;
+          padding: 5px 15px;
+          z-index: 1; }
+          .titlebar.is-fixed {
+            animation: header-animate .5s; }
+            
+            .toolbar {
+              float: right;
+              display: inline-block;
+              margin-top: 3px; }
+              .toolbar > button,
+              .toolbar > .btn,
+              .toolbar > .btn.btn-xs,
+              .toolbar > .btn .btn-sm,
+              .toolbar > .btn.btn-lg,
+              .toolbar > button.btn,
+              .toolbar > a.btn {
+                min-height: 22px !important;
+                height: 22px !important;
+                font-weight: 400;
+                font-size: 12px;
+                padding-top: 1px !important;
+                padding-left: 5px;
+                padding-right: 5px;
+                margin-left: 5px; }
+                .container-fluid{
+                margin-top: 90px !important;
+                }
+    </style>
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed text-sm" id="body">
@@ -36,7 +73,7 @@
                 </a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a  asp-controller="Home" asp-action="Index" class="nav-link">Home</a>
+                <a asp-controller="Home" asp-action="Index" class="nav-link">Home</a>
             </li>
             @* Client Dropdown *@
             <li class="nav-item dropdown">
@@ -61,6 +98,11 @@
                     <b>Version</b>
                 </span>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" onclick="backupDatabase();">
+                    <b>Backup</b>
+                </a>
+            </li>
             <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
@@ -73,7 +115,7 @@
                         <i class="fas fa-key mr-2"></i> Change Passowrd
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a asp-controller="Home" class="dropdown-item">
+                    <a asp-controller="Auth" asp-action="LogOut" class="dropdown-item">
                         <i class="fas fa-sign-out-alt mr-2"></i> Log Out
                     </a>
                 </div>
@@ -182,16 +224,16 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Main content -->
-        <section class="content-header">
+        <section class="content-header titlebar"  style="z-index: 10;">
             <div class="toolbar">
                 @await RenderSectionAsync("ToolBar", required: false)
             </div>
-            <div class="container-fluid">
-                <!-- Info boxes -->
-                @RenderBody()
-                <!-- /.row -->
-            </div><!--/. container-fluid -->
         </section>
+        <div class="container-fluid">
+            <!-- Info boxes -->
+            @RenderBody()
+            <!-- /.row -->
+        </div><!--/. container-fluid -->
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
@@ -237,3 +279,21 @@
 
 
 </html>
+
+<script>
+    async function backupDatabase() {
+        try {
+            const response = await fetch('/Api/Backup/Backup', {
+                method: 'POST'
+            });
+            if (response.ok) {
+                alert('Backup completed successfully.');
+            } else {
+                const errorMessage = await response.text();
+                alert(`Backup failed: ${errorMessage}`);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+</script>

@@ -1,12 +1,13 @@
 using api_fetch.ViewModel;
-using App.Base.ValueObject;
+using App.Expenses.Dto;
 using App.Expenses.Enum;
 
 namespace api_fetch.Areas.Root.ViewModel.Expenses;
 
 public class ExpensesSearchVm : BaseFilterVm
 {
-    public PagedResult<ExpensesInfoVm> ExpensesCategories { get; set; }
+   // public PagedResult<ExpensesInfoVm> ExpensesCategories { get; set; }
+   public List<SearchExpensesDto> Categories { get; set; }
     public DateTime Date { get; set; } = DateTime.Now;
 }
 
