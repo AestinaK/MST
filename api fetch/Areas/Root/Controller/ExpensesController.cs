@@ -10,6 +10,7 @@ using App.Setup.Repository.Interface;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Pioneer.Pagination;
 
 namespace api_fetch.Areas.Root.Controller;
 
@@ -43,24 +44,7 @@ public class ExpensesController : Microsoft.AspNetCore.Mvc.Controller
         vm.Categories = await _expensesProvider.GetExpensesList(vm.Date);
         return View(vm);
     }
-
-    // public async Task<PagedResult<ExpensesInfoVm>> FilterVm(ExpensesSearchVm vm)
-    // {
-    //     var expenses = _expensesCRepo.GetQueryable();
-    //     var data = _expensesRecordRepo.GetQueryable().Where(x => x.TxnDate <= vm.Date);
-    //     var result = await (from d in data
-    //         join e in expenses on d.ExpensesId equals e.Id
-    //         select new ExpensesInfoVm()
-    //         {
-    //             Id = d.Id,
-    //             Amount = d.Amount,
-    //             Category = e.Name,
-    //             Date = d.TxnDate,
-    //             Status = d.Status
-    //         }).PaginateAsync(vm.Page, vm.Limit);
-    //     return result;
-    // }
-
+    
     [HttpGet]
     public async Task<IActionResult> Add()
     {

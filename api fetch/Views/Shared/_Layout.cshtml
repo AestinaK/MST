@@ -99,7 +99,7 @@
                 </span>
             </li>
             <li class="nav-item">
-                <a class="nav-link" onclick="backupDatabase();">
+                <a class="nav-link" asp-area="Setup" asp-controller="Backup" asp-action="Index">
                     <b>Backup</b>
                 </a>
             </li>
@@ -281,19 +281,19 @@
 </html>
 
 <script>
-    async function backupDatabase() {
-        try {
-            const response = await fetch('/Api/Backup/Backup', {
-                method: 'POST'
-            });
-            if (response.ok) {
-                alert('Backup completed successfully.');
-            } else {
-                const errorMessage = await response.text();
-                alert(`Backup failed: ${errorMessage}`);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
+    // async function backupDatabase() {
+    //     try {
+    //         const response = await fetch('/Api/Backup/Backup', {
+    //             method: 'POST'
+    //         });
+    //         if (response.ok) {
+    //             alert('Backup completed successfully.');
+    //         } else {
+    //             const errorMessage = await response.text();
+    //             alert(`Backup failed: ${errorMessage}`);
+    //         }
+    //     } catch (error) {
+    //         console.error('Error:', error);
+    //     }
+    // }
 </script>
