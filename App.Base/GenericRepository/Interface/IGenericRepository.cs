@@ -15,4 +15,6 @@ public interface IGenericRepository <T> where T : class
         Func<IQueryable<T>,
                 IQueryable<T>>
             callback = null, int page = 1, int limit = 10);
+
+    Task<bool> CheckIfExistAsync(Expression<Func<T,bool>> predicate);
 }

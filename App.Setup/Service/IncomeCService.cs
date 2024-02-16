@@ -3,6 +3,7 @@ using App.Setup.Dto;
 using App.Setup.Model;
 using App.Setup.Repository.Interface;
 using App.Setup.Service.Interface;
+using App.Setup.Validators.Interface;
 
 namespace App.Setup.Service;
 
@@ -10,16 +11,20 @@ public class IncomeCService : IIncomeCService
 {
     private readonly IUow _uow;
     private readonly IIncomeCRepository _incomeCRepo;
+    private readonly ICategoryValidator _categoryValidator;
 
     public IncomeCService(IUow uow,
-        IIncomeCRepository incomeCRepo)
+        IIncomeCRepository incomeCRepo,
+        ICategoryValidator categoryValidator)
     {
         _uow = uow;
         _incomeCRepo = incomeCRepo;
+        _categoryValidator = categoryValidator;
     }
 
     public async Task<IncomeCategory> CreateIncomeCategory(IncomeCDto dto)
     {
+        await _categoryValidator.IncomeCValidator(dto);
         var income = new IncomeCategory();
         income.Name = dto.Name;
         income.Description = dto.Description;

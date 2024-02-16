@@ -43,11 +43,17 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         queryable = ApplyCallback(queryable, callback);
         return await queryable.PaginateAsync(page, limit);
     }
-    
+
+    public async Task<bool> CheckIfExistAsync(Expression<Func<T,bool>> predicate)
+    {
+        return await _dbSet.AnyAsync(predicate);
+    }
+
     protected IQueryable<T> GetPredicatedQueryable(Expression<Func<T, bool>> expression) =>
         GetQueryable().Where(expression ?? (x => true));
 
     protected IQueryable<T> ApplyCallback(IQueryable<T> queryable,
         Func<IQueryable<T>, IQueryable<T>> callback = null) =>
         callback == null ? queryable : callback(queryable);
+   
 }
