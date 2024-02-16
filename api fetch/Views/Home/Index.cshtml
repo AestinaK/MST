@@ -1,4 +1,9 @@
-﻿@{
+﻿@using App.Expenses.Repository.Interface
+@using App.Base.Constants
+@model api_fetch.ViewModel.IndexDataVm
+@inject IExpensesRecordRepository ExpensesRecord
+@inject IIncomeRecordRepository IncomeRecord
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -17,14 +22,16 @@
 </style>
 
 <div class="row">
-    <div class="col-12 col-sm-6 col-md-3 dashboard-Info">
+    <div class="col-12 col-sm-6 col-md-3 dashboard-Info" onclick="window.location.href= 'Root/Income/Index'">
         <div class="info-box">
-            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-solid fa-cog"></i></span>
+            <span class="info-box-icon bg-info elevation-1">
+                <i class="fas fa-money-bill-wave"></i>
+            </span>
 
             <div class="info-box-content">
-                <span class="info-box-text">Total Tasks</span>
+                <span class="info-box-text">Total Income</span>
                 <span class="info-box-number">
-                   2
+                    Rs. @Model.TotalIncome
                 </span>
             </div>
             <!-- /.info-box-content -->
@@ -32,13 +39,14 @@
         <!-- /.info-box -->
     </div>
     <!-- /.col -->
-    <div class="col-12 col-sm-6 col-md-3 dashboard-Info">
+    <div class="col-12 col-sm-6 col-md-3 dashboard-Info" onclick="window.location.href = 'Root/Expenses/Index' ">
         <div class="info-box mb-3">
-            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-solid fa-microchip"></i></span>
-
+            <span class="info-box-icon bg-danger elevation-1">
+                <i class="fas fa-money"></i>
+            </span>
             <div class="info-box-content">
-                <span class="info-box-text">Pending Tasks</span>
-                <span class="info-box-number">1</span>
+                <span class="info-box-text">Total Expenses</span>
+                <span class="info-box-number">Rs. @Model.TotalExpenses</span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -48,9 +56,11 @@
     <!-- fix for small devices only -->
     <div class="clearfix hidden-md-up"></div>
 
-    <div class="col-12 col-sm-4 col-md-3 dashboard-Info" >
+    <div class="col-12 col-sm-4 col-md-3 dashboard-Info" onclick="window.location.href = 'Home/Index' ">
         <div class="info-box mb-3">
-            <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-solid fa-hammer"></i></span>
+            <span class="info-box-icon bg-warning elevation-1">
+                <i class="fa fa-solid fa-hammer"></i>
+            </span>
 
             <div class="info-box-content">
                 <span class="info-box-text">Processing Tasks</span>
@@ -61,9 +71,11 @@
         <!-- /.info-box -->
     </div>
     <!-- /.col -->
-    <div class="col-12 col-sm-4 col-md-3 dashboard-Info" >
+    <div class="col-12 col-sm-4 col-md-3 dashboard-Info">
         <div class="info-box mb-3">
-            <span class="info-box-icon bg-green elevation-1"><i class="fas fa-solid fa-check"></i></span>
+            <span class="info-box-icon bg-green elevation-1">
+                <i class="fas fa-solid fa-check"></i>
+            </span>
 
             <div class="info-box-content">
                 <span class="info-box-text">Completed Tasks</span>
@@ -78,33 +90,107 @@
 
 
 <div class="row">
-    <div class="col-6">
-        <!-- PIE CHART -->
-        <div class="card card-dark">
+    @* <div class="col-6"> *@
+    @*     <!-- PIE CHART --> *@
+    @*     <div class="card card-dark"> *@
+    @*         <div class="card-header"> *@
+    @*             <h3 class="card-title">Task Chart</h3> *@
+    @* *@
+    @*             <div class="card-tools"> *@
+    @*                 <button type="button" class="btn btn-tool" data-card-widget="collapse"> *@
+    @*                     <i class="fas fa-minus"></i> *@
+    @*                 </button> *@
+    @*                 @*<button type="button" class="btn btn-tool" data-card-widget="remove"> *@
+    @*                     <i class="fas fa-times"></i> *@
+    @*                 </button> *@
+    @*             </div> *@
+    @*         </div> *@
+    @*         <div class="card-body"> *@
+    @*             <canvas  style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas> *@
+    @*         </div> *@
+    @* *@
+    @*         <!-- /.card-body --> *@
+    @*     </div> *@
+    @*     <!-- /.card --> *@
+    @* </div> *@
+    <div class="col-12">
+        <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Task Chart</h3>
-
+                <h3 class="card-title">Summary</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
                     </button>
-                    @*<button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
                         <i class="fas fa-times"></i>
-                    </button> *@
+                    </button>
                 </div>
             </div>
+            <!-- /.card-header -->
             <div class="card-body">
-                <canvas id="pieChart" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="chart-responsive">
+                            <canvas id="incomeChart" height="240" width="240"></canvas>
+                        </div>
+                        <!-- ./chart-responsive -->
+                    </div>
+                    <div class="col-md-6">
+                        <div class="chart-responsive">
+                            <canvas id="expensesChart" height="240" width="240"></canvas>
+                        </div>
+                        <!-- ./chart-responsive -->
+                    </div>
+                </div>
+                <!-- /.row -->
             </div>
             <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
-    <div class="6">
+            <div class="card-footer p-0">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            Income
+                            @if (@Model.TotalIncome < @Model.TotalExpenses)
+                            {
+                                <span class="float-right text-danger">
+                                    <i class="fas fa-arrow-down text-sm"></i>
+                                    @(Model.TotalExpenses - Model.TotalIncome)
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="float-right text-success">
+                                    <i class="fas fa-arrow-up text-sm"></i>
+                                    @(Model.TotalIncome - Model.TotalExpenses)
+                                </span>
+                            }
 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            Expenses
+                            @if (@Model.TotalExpenses < @Model.TotalIncome)
+                            {
+                                <span class="float-right text-success">
+                                    <i class="fas fa-arrow-down text-sm"></i>
+                                    @(Model.TotalIncome - Model.TotalExpenses)
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="float-right text-danger">
+                                    <i class="fas fa-arrow-up text-sm"></i>
+                                    @(Model.TotalExpenses - Model.TotalIncome)
+                                </span>
+                            }
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.footer -->
+        </div>
     </div>
 </div>
-
-@section Scripts{
-    <script src="plugins/chart.js/Chart.js"></script>
-}
+<script src="~/plugins/chart.js/Chart.js"></script>
+<script src="Chart/PieChart.js"></script>

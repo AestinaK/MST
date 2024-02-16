@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using api_fetch.Provider.Interface
+@using App.Base.Constants
+@inject IUserProvider UserProvider;
+@{
+    var user = UserProvider.GetCurrentUser();
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -95,7 +102,7 @@
             </li>
             <li class="nav-item">
                 <span class="nav-link">
-                    <b>Version</b>
+                    <b>Version</b> : @AppVersionConstants.Version
                 </span>
             </li>
             <li class="nav-item">
@@ -112,7 +119,7 @@
                     <span class="dropdown-item dropdown-header"></span>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item">
-                        <i class="fas fa-key mr-2"></i> Change Passowrd
+                        <i class="fas fa-key mr-2"></i> Change Password
                     </a>
                     <div class="dropdown-divider"></div>
                     <a asp-controller="Auth" asp-action="LogOut" class="dropdown-item">
@@ -148,7 +155,7 @@
                     <img src="~/image/avatar.png" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block" id="FullName"></a>
+                    <a href="#" class="d-block" id="FullName">@user.Name</a>
                 </div>
             </div>
             <script>
