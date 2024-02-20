@@ -15,10 +15,12 @@ public static class DiConfig
         //Repositories
         services.AddScoped<IExpensesCRepository, ExpensesCRepository>();
         services.AddScoped<IIncomeCRepository,IncomeCRepository>();
+        services.AddScoped<IReminderRepository, ReminderRepository>();
 
         //Services
         services.AddScoped<IExpensesCService, ExpensesCService>();
         services.AddScoped<IIncomeCService, IncomeCService>();
+        services.AddScoped<IReminderService, ReminderService>();
 
         //validators
         services.AddScoped<ICategoryValidator,CategoryValidator>();

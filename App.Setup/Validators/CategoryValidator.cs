@@ -26,7 +26,6 @@ public class CategoryValidator : ICategoryValidator
             throw new DataExistException();
         }
     }
-
     public async Task ExpensesCValidator(ExpensesCDto dto)
     {
         bool exist = await _expensesCRepo.CheckIfExistAsync(x => x.Name == dto.Name);
