@@ -9,6 +9,7 @@ public static class EntityRegistrar
     {
         builder.Entity<ExpensesCategory>();
         builder.Entity<IncomeCategory>();
+        builder.Entity<Reminder>();
         return builder;
     }
 }

@@ -1,0 +1,43 @@
+@model api_fetch.Areas.Setup.ViewModel.Reminder.ReminderVm
+<div class="main-container">
+<form method="post">
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">Add Expenses category</strong>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="CategoryId"></label>
+                        <select asp-for="CategoryId" class="form-control chosen" asp-items="@Model.GetCategoryList();">
+                            <option value="">--Select-- </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DueDate"></label>
+                        <vc:date-input value="@Model.DueDate" name="DueDate" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description"></label>
+                        <textarea asp-for="Description" class="form-control" rows="5" ></textarea>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-block">
+                                    <i class="fas fa-check"></i>
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>

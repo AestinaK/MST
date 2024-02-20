@@ -27,6 +27,7 @@ public class ExpensesCService : IExpensesCService
         await _categoryValidator.ExpensesCValidator(dto);
         var category = new ExpensesCategory();
         category.Name = dto.Name;
+        category.DueDate = dto.Date;
         category.Description = dto.Description;
         await _uow.CreateAsync(category);
         await _uow.CommitAsync();
