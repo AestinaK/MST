@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using api_fetch.Data;
@@ -11,9 +12,10 @@ using api_fetch.Data;
 namespace api_fetch.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240220055754_date_in_expensesCat")]
+    partial class date_in_expensesCat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,41 +163,6 @@ namespace api_fetch.Migrations
                     b.ToTable("income_category", "setup");
                 });
 
-            modelBuilder.Entity("App.Setup.Model.Reminder", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<long?>("CategoryId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("DueDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<bool>("IsCompleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("RecDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<char>("RecStatus")
-                        .HasMaxLength(1)
-                        .HasColumnType("character(1)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("reminder", "setup");
-                });
-
             modelBuilder.Entity("App.User.Model.User", b =>
                 {
                     b.Property<long>("Id")
@@ -268,15 +235,6 @@ namespace api_fetch.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("App.Setup.Model.Reminder", b =>
-                {
-                    b.HasOne("App.Setup.Model.ExpensesCategory", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId");
-
-                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }
