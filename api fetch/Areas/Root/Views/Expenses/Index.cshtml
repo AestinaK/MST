@@ -68,7 +68,7 @@
                                     <td>@(i++)</td>
                                     <td>@item.Name</td>
                                     <td>@item.Status</td>
-                                    <td>@item.TxnDate</td>
+                                    <td>@item.TxnDate.ToShortDateString()</td>
                                     <td>@item.Amount</td>
                                     <td>
                                         <a class="btn btn-success" asp-controller="Expenses" asp-action="Update" asp-area="Root"

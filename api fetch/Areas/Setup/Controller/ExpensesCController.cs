@@ -27,6 +27,7 @@ public class ExpensesCController : Microsoft.AspNetCore.Mvc.Controller
     public async Task<IActionResult> Add()
     {
         var vm = new ExpensesCVm();
+        vm.DueDate = DateTime.Today;
         vm.Categories = await _expensesCRepo.GetAllAsync();
         return View(vm);
     }
@@ -39,6 +40,7 @@ public class ExpensesCController : Microsoft.AspNetCore.Mvc.Controller
             var dto = new ExpensesCDto()
             {
                 Name = vm.Name,
+                Date = vm.DueDate,
                 Description = vm.Description
             };
             await _expensesCService.CreateExpenses(dto);
