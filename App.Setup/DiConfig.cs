@@ -1,3 +1,5 @@
+using App.Setup.Provider;
+using App.Setup.Provider.Interface;
 using App.Setup.Repository;
 using App.Setup.Repository.Interface;
 using App.Setup.Service;
@@ -24,6 +26,9 @@ public static class DiConfig
 
         //validators
         services.AddScoped<ICategoryValidator,CategoryValidator>();
+        
+        //providers
+        services.AddScoped<IExpensesCategoryProvider,ExpensesCategoryProvider>();
         return services;
     }
 }
