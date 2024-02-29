@@ -18,7 +18,7 @@ public class ExpensesCategoryProvider : IExpensesCategoryProvider
    
     public async Task<List<DropdownDto>> GetCategoryAsync()
     {
-        return await _expensesCRepo.GetQueryable().Where(x=>x.RecStatus==Status.Active)
+        return await _expensesCRepo.GetQueryable().Where(x=>x.RecStatus == Status.Active)
             .Select(x=>new DropdownDto()
             {
                 Id = x.Id,

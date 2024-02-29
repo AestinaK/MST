@@ -1,5 +1,4 @@
 ﻿@using App.Expenses.Repository.Interface
-@using App.Base.Constants
 @model api_fetch.ViewModel.IndexDataVm
 @inject IExpensesRecordRepository ExpensesRecord
 @inject IIncomeRecordRepository IncomeRecord
@@ -18,6 +17,33 @@
 
     .dashboard-Info:hover .fa-solid{
         transform: scale(1.1)
+    }
+    .info-boxes{
+    box-shadow:0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);
+    border-radius:.25rem;
+    background-color:#fff;
+    display:flex;
+    flex-direction: row;
+    margin-bottom:1rem;
+    min-height:30px;
+    padding:.5rem;
+    width:100%}
+    
+    .info-boxes .info-box-icon{
+    border-radius:.25rem;
+    align-items:center;
+    display:flex;
+    font-size:1.875rem;
+    justify-content: center;
+    text-align:center;
+    width:70px
+    }
+    .info-boxes span{
+        font-weight: bold;
+    }
+    .info-boxes .item-name {
+        flex-grow: 1; /* Let it take up remaining space */
+        margin-right: auto; /* Push it to the left */
     }
 </style>
 
@@ -191,35 +217,47 @@
             <!-- /.footer -->
         </div>
     </div>
-    @* <div class="col-6"> *@
-    @*     <div class="card bg-gradient-info"> *@
-    @*         <div class="card-header border-0"> *@
-    @*             <h3 class="card-title"> *@
-    @*                 <i class="far fa-calendar-alt"></i> *@
-    @*                 Calendar *@
-    @*             </h3> *@
-    @*             <!-- tools card --> *@
-    @*             <div class="card-tools"> *@
-    @*                 <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse"> *@
-    @*                     <i class="fas fa-minus"></i> *@
-    @*                 </button> *@
-    @*                 <button type="button" class="btn btn-primary btn-sm" data-card-widget="remove"> *@
-    @*                     <i class="fas fa-times"></i> *@
-    @*                 </button> *@
-    @*             </div> *@
-    @*             <!-- /. tools --> *@
-    @*         </div> *@
-    @*         <!-- /.card-header --> *@
-    @*         <div class="card-body pt-0"> *@
-    @*             <!--The calendar --> *@
-    @*             <div id="calendar" style="width: 100%"> *@
-    @*                 <partial name="_calender"/> *@
-    @*                      *@
-    @*             </div> *@
-    @*         </div> *@
-    @*         <!-- /.card-body --> *@
-    @*     </div> *@
-    @* </div> *@
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Upcoming Bills</strong>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <!-- Info Boxes Style 2 -->
+                    @{
+                        foreach (var item in Model.Reminders)
+                        {
+                            <div class="info-boxes mb-3 bg-info">
+
+                                <span class="info-box-icon">
+                                   <i class="fa fa-repeat"></i>
+                                </span>
+                                <span class="item-name">@item.Name</span>
+                                @if (@item.DueDays == 0)
+                                {
+                                    <span class="item-name">Today</span>
+
+                                }else if(@item.DueDays == 1){
+                                <span class="item-name">Tomorrow</span>
+                                }
+                                else
+                                {
+                                    <span class="item-name">In @item.DueDays Days</span>
+                                }
+                                
+                                <span>@item.Date.ToShortDateString()</span>
+                            </div>
+                        }
+                    }
+
+                    <!-- /.info-box-content -->
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="~/plugins/chart.js/Chart.js"></script>
 <script src="Chart/PieChart.js"></script>
